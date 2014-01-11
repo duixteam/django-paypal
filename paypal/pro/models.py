@@ -3,7 +3,7 @@
 from django.db import models
 from django.utils.http import urlencode
 from django.forms.models import model_to_dict
-from django.contrib.auth.models import User
+from django.conf import settings
 
 try:
     from idmapper.models import SharedMemoryModel as Model
@@ -66,7 +66,7 @@ class PayPalNVP(Model):
     custom = models.CharField(max_length=255, blank=True)
 
     # Admin fields
-    user = models.ForeignKey(User, blank=True, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     flag = models.BooleanField(default=False, blank=True)
     flag_code = models.CharField(max_length=32, blank=True)
     flag_info = models.TextField(blank=True)
